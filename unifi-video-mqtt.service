@@ -1,0 +1,14 @@
+[Unit]
+Description=Unifi Video Motion Detection to MQTT
+After=network.target
+
+[Service]
+User=unifi-video
+Restart=always
+RestartSec=5
+Type=simple
+ExecStart=/usr/local/bin/unifi-video-mqtt.sh
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
