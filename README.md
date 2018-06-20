@@ -5,8 +5,14 @@ This script can run on your Unifi Video server and push MQTT messages to a broke
 
 This can be useful for systems like Homeassistant that are lacking motion detection integration with Unifi Video.
 
-Currently, the script is only setup for one camera but others can be added easily by modifying
-the script.
+Currently, the script is only setup for one camera but others can be added easily by modifying the script.
+
+# Reference
+Unifi Video writes to */var/log/unifi-video/motion.log* and it ouputs logs like this.  This script parses this log:
+```
+1529536461.847 2018-06-20 19:14:21.847/EDT: INFO   Camera[F0xxxxxxxxxx] type:start event:13 clock:11856432 (Front Door) in ApplicationEvtBus-7
+1529536479.865 2018-06-20 19:14:39.865/EDT: INFO   Camera[F0xxxxxxxxxx] type:stop event:13 clock:11874454 (Front Door) in ApplicationEvtBus-16
+```
 
 # Requirements
 * Unifi Video Server
@@ -32,6 +38,7 @@ systemctl daemon-reload
 systemctl enable unifi-video-mqtt
 ```
 
+# IMPORTANT!!!
 Before starting the service, make sure to edit */usr/local/bin/unifi-video-mqtt.sh* with your specific
 settings (ip, username, password, etc)
 
