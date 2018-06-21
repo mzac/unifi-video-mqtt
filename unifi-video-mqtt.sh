@@ -20,10 +20,10 @@ while inotifywait -e modify $UNIFI_MOTION_LOG; do
     # Camera 1 triggered
 	  if [[ $LAST_EVENT == "start" ]]; then
 	    echo "Motion started on $CAM1_NAME"
-	    mosquitto_pub -h $MQTT_SERVER -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "on" &
+	    mosquitto_pub -h $MQTT_SERVER -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "ON" &
 	  else
 	    echo "Motion stopped on $CAM1_NAME"
-	    mosquitto_pub -h $MQTT_SERVER -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "off" &
+	    mosquitto_pub -h $MQTT_SERVER -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "OFF" &
 	  fi
   fi
 done
