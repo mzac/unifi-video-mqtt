@@ -40,7 +40,17 @@ systemctl enable unifi-video-mqtt
 
 # IMPORTANT!!!
 Before starting the service, make sure to edit */usr/local/bin/unifi-video-mqtt.sh* with your specific
-settings (ip, username, password, etc)
+settings:
+
+```
+# MQTT Vars
+MQTT_SERVER="192.168.x.x"
+MQTT_TOPIC_BASE="camera/motion"
+
+# Camera Defs
+CAM1_NAME="camera_name"
+CAM1_ID="F0xxxxxxxxxx"
+```
 
 Test it to make sure it works:
 ```
