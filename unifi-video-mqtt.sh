@@ -7,9 +7,22 @@ UNIFI_MOTION_LOG=/var/log/unifi-video/motion.log
 MQTT_SERVER="192.168.x.x"
 MQTT_TOPIC_BASE="camera/motion"
 
+# MQTT User/Pass Vars, only use if needed
+#MQTT_USER="username"
+#MQTT_PASS="password"
+
 # Camera Defs
 CAM1_NAME="camera_name"
 CAM1_ID="F0xxxxxxxxxx"
+
+# --------------------------------------------------------------------------------
+# Script starts here
+
+if [[ -n "$MQTT_USER" && -n "$MQTT_PASS" ]]; then
+  $MQTT_USER_PASS="-u $MQTT_USER -P $MQTT_PASS"
+else
+  $MQTT_USER_PASS=""
+fi
 
 while inotifywait -e modify $UNIFI_MOTION_LOG; do
   LAST_MESSAGE=`tail -n1 $UNIFI_MOTION_LOG`
@@ -20,10 +33,10 @@ while inotifywait -e modify $UNIFI_MOTION_LOG; do
     # Camera 1 triggered
 	  if [[ $LAST_EVENT == "start" ]]; then
 	    echo "Motion started on $CAM1_NAME"
-	    mosquitto_pub -h $MQTT_SERVER -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "ON" &
+	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "ON" &
 	  else
 	    echo "Motion stopped on $CAM1_NAME"
-	    mosquitto_pub -h $MQTT_SERVER -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "OFF" &
+	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "OFF" &
 	  fi
   fi
 done
