@@ -19,9 +19,9 @@ CAM1_ID="F0xxxxxxxxxx"
 # Script starts here
 
 if [[ -n "$MQTT_USER" && -n "$MQTT_PASS" ]]; then
-  $MQTT_USER_PASS="-u $MQTT_USER -P $MQTT_PASS"
+  MQTT_USER_PASS="-u $MQTT_USER -P $MQTT_PASS"
 else
-  $MQTT_USER_PASS=""
+  MQTT_USER_PASS=""
 fi
 
 while inotifywait -e modify $UNIFI_MOTION_LOG; do
