@@ -5,6 +5,7 @@ UNIFI_MOTION_LOG=/var/log/unifi-video/motion.log
 
 # MQTT Vars
 MQTT_SERVER="192.168.x.x"
+#MQTT_PORT="123"
 MQTT_TOPIC_BASE="camera/motion"
 
 # MQTT User/Pass Vars, only use if needed
@@ -22,10 +23,16 @@ CAM4_ID="F0xxxxxxxxxx"
 # --------------------------------------------------------------------------------
 # Script starts here
 
-if [[ -n "$MQTT_USER" && -n "$MQTT_PASS" ]]; then
-  $MQTT_USER_PASS="-u $MQTT_USER -P $MQTT_PASS"
+if [[ -n "$MQTT_PORT" ]]; then
+  MQTT_SERVER_AND_PORT="-h $MQTT_SERVER -p $MQTT_PORT"
 else
-  $MQTT_USER_PASS=""
+  MQTT_SERVER_AND_PORT="-h $MQTT_SERVER"
+fi
+
+if [[ -n "$MQTT_USER" && -n "$MQTT_PASS" ]]; then
+  MQTT_USER_PASS="-u $MQTT_USER -P $MQTT_PASS"
+else
+  MQTT_USER_PASS=""
 fi
 
 while inotifywait -e modify $UNIFI_MOTION_LOG; do
@@ -37,10 +44,10 @@ while inotifywait -e modify $UNIFI_MOTION_LOG; do
     # Camera 1 triggered
 	  if [[ $LAST_EVENT == "start" ]]; then
 	    echo "Motion started on $CAM1_NAME"
-	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "ON" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "ON" &
 	  else
 	    echo "Motion stopped on $CAM1_NAME"
-	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "OFF" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "OFF" &
 	  fi
   fi
 
@@ -48,10 +55,10 @@ while inotifywait -e modify $UNIFI_MOTION_LOG; do
     # Camera 2 triggered
 	  if [[ $LAST_EVENT == "start" ]]; then
 	    echo "Motion started on $CAM2_NAME"
-	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM2_NAME -m "ON" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM2_NAME -m "ON" &
 	  else
 	    echo "Motion stopped on $CAM2_NAME"
-	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM2_NAME -m "OFF" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM2_NAME -m "OFF" &
 	  fi
   fi
 
@@ -59,10 +66,10 @@ while inotifywait -e modify $UNIFI_MOTION_LOG; do
     # Camera 3 triggered
 	  if [[ $LAST_EVENT == "start" ]]; then
 	    echo "Motion started on $CAM3_NAME"
-	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM3_NAME -m "ON" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM3_NAME -m "ON" &
 	  else
 	    echo "Motion stopped on $CAM3_NAME"
-	    mosquitto_pub -h $MQTT_SERVER $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM3_NAME -m "OFF" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM3_NAME -m "OFF" &
 	  fi
   fi
 done
