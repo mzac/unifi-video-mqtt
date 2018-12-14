@@ -45,7 +45,13 @@ settings:
 ```
 # MQTT Vars
 MQTT_SERVER="192.168.x.x"
+#MQTT_PORT="1883"
 MQTT_TOPIC_BASE="camera/motion"
+
+# MQTT User/Pass Vars, only use if needed
+#MQTT_USER="username"
+#MQTT_PASS="password"
+#MQTT_ID="yourid"  ## To make it work with hassio
 
 # Camera Defs
 CAM1_NAME="camera_name"
