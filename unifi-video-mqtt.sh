@@ -11,6 +11,7 @@ MQTT_TOPIC_BASE="camera/motion"
 # MQTT User/Pass Vars, only use if needed
 #MQTT_USER="username"
 #MQTT_PASS="password"
+#MQTT_ID="yourid"  ## To make it work with hassio
 
 # Camera Defs
 CAM1_NAME="camera_name"
@@ -40,10 +41,10 @@ while inotifywait -e modify $UNIFI_MOTION_LOG; do
     # Camera 1 triggered
 	  if [[ $LAST_EVENT == "start" ]]; then
 	    echo "Motion started on $CAM1_NAME"
-	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "ON" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -I $MQTT_ID -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "ON" &
 	  else
 	    echo "Motion stopped on $CAM1_NAME"
-	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "OFF" &
+	    mosquitto_pub $MQTT_SERVER_AND_PORT $MQTT_USER_PASS -r -I $MQTT_ID -t $MQTT_TOPIC_BASE/$CAM1_NAME -m "OFF" &
 	  fi
   fi
 done
