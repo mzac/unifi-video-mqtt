@@ -45,7 +45,7 @@ settings:
 ```
 # MQTT Vars
 MQTT_SERVER="192.168.x.x"
-#MQTT_PORT="1883"
+MQTT_PORT="1883"
 MQTT_TOPIC_BASE="camera/motion"
 
 # MQTT User/Pass Vars, only use if needed
