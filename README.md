@@ -13,6 +13,10 @@ Unifi Video writes to */var/log/unifi-video/motion.log* and it ouputs logs like 
 1559209064.179 2019-05-30 19:07:44.179/ACST: INFO   [uv.analytics.motion] [AnalyticsService] [REDACTED|Front Door] MotionEvent type:start event:17 clock:14369834 in AnalyticsEvtBus-0
 1559209090.983 2019-05-30 19:08:10.983/ACST: INFO   [uv.analytics.motion] [AnalyticsService] [REDACTED|Front Door] MotionEvent type:stop event:17 clock:14396566 in AnalyticsEvtBus-1
 ```
+
+# Todo
+* Re-write in Python as it might be more efficient
+
 # Requirements
 * Unifi Video Server
 * MQTT Client
