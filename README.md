@@ -10,9 +10,8 @@ Currently, the script is only setup for one camera but others can be added easil
 # Reference
 Unifi Video writes to */var/log/unifi-video/motion.log* and it ouputs logs like this.  This script parses this log:
 ```
-1529536461.847 2018-06-20 19:14:21.847/EDT: INFO   Camera[F0xxxxxxxxxx] type:start event:13 clock:11856432 (Front Door) in ApplicationEvtBus-7
-1529536479.865 2018-06-20 19:14:39.865/EDT: INFO   Camera[F0xxxxxxxxxx] type:stop event:13 clock:11874454 (Front Door) in ApplicationEvtBus-16
-```
+1559209064.179 2019-05-30 19:07:44.179/ACST: INFO   [uv.analytics.motion] [AnalyticsService] [REDACTED|Front Door] MotionEvent type:start event:17 clock:14369834 in AnalyticsEvtBus-0
+1559209090.983 2019-05-30 19:08:10.983/ACST: INFO   [uv.analytics.motion] [AnalyticsService] [REDACTED|Front Door] MotionEvent type:stop event:17 clock:14396566 in AnalyticsEvtBus-1```
 
 # Requirements
 * Unifi Video Server
