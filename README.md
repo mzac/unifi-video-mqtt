@@ -59,7 +59,7 @@ CAM1_ID="F0xxxxxxxxxx"
 
 Test it to make sure it works:
 ```
-/usr/local/bin/unifi-video-mqtt
+/usr/local/bin/unifi-video-mqtt.sh
 ```
 
 Create some motion on your camera and subscribe to your MQTT server and see if you see motion:
