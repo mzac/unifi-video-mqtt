@@ -35,14 +35,14 @@ else
 fi
 
 # Check for version of log file, the format changed in Unifi Video 3.10
-VER_TEST=`tail -1 $UNIFI_MOTION_LOG | awk {'print $6'} | cut -d '[' -f 1`
+VER_TEST=`tail -1 $UNIFI_MOTION_LOG | awk {'print $5'}`
 
 while inotifywait -e modify $UNIFI_MOTION_LOG; do
   LAST_MESSAGE=`tail -n1 $UNIFI_MOTION_LOG`
 
-  if [[ $VER_TEST == "Camera" ]]; then
+  if [[ $VER_TEST == "[uv.analytics.motion]" ]]; then
     # New Format
-    LAST_CAM=`echo $LAST_MESSAGE | awk -F '[][]' '{print $4}'`
+    LAST_CAM=`echo $LAST_MESSAGE | awk -F '[][]' '{print $6}' | cut -d '|' -f 1`
   else
     # Old Format
     LAST_CAM=`echo $LAST_MESSAGE | awk -F '[][]' '{print $2}'`
