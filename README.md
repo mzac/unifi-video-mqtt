@@ -7,6 +7,10 @@ This can be useful for systems like Homeassistant that are lacking motion detect
 
 Currently, the script is only setup for one camera but others can be added easily by modifying the script.
 
+# Unifi Protect
+If you are looking for Unifi protect please see this fork:
+* https://github.com/terafin/unifi-video-mqtt
+
 # Reference
 Unifi Video writes to */var/log/unifi-video/motion.log* and it ouputs logs like this.  This script parses this log:
 ```
