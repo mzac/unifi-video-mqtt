@@ -9,7 +9,8 @@ Currently, the script is only setup for one camera but others can be added easil
 
 # Unifi Protect
 If you are looking for Unifi protect please see this fork:
-* https://github.com/terafin/unifi-video-mqtt
+* https://github.com/terafin/mqtt-unifi-protect-bridge
+* https://github.com/terafin/unifi-video-mqtt (depreciated)
 
 # Reference
 Unifi Video writes to */var/log/unifi-video/motion.log* and it ouputs logs like this.  This script parses this log:
