@@ -4,9 +4,9 @@
 UNIFI_MOTION_LOG=/var/log/unifi-video/motion.log
 
 # MQTT Vars
-MQTT_SERVER="192.168.x.x"
-MQTT_PORT="1883"
-MQTT_TOPIC_BASE="camera/motion"
+#MQTT_SERVER="192.168.x.x"
+#MQTT_PORT="1883"
+#MQTT_TOPIC_BASE="camera/motion"
 
 # MQTT User/Pass Vars, only use if needed
 #MQTT_USER="username"
@@ -14,8 +14,8 @@ MQTT_TOPIC_BASE="camera/motion"
 #MQTT_ID="yourid"  ## To make it work with hassio
 
 # Camera Defs
-CAM1_NAME="camera_name"
-CAM1_ID="F0xxxxxxxxxx"
+#CAM1_NAME="camera_name"
+#CAM1_ID="F0xxxxxxxxxx"
 
 # --------------------------------------------------------------------------------
 # Script starts here
@@ -50,7 +50,7 @@ while inotifywait -e modify $UNIFI_MOTION_LOG; do
 
   LAST_EVENT=`echo $LAST_MESSAGE | cut -d ':' -f 5 | cut -d ' ' -f 1`
 
-  if echo $LAST_CAM | grep -n1 $CAM1_ID; then
+  if echo $LAST_CAM | grep $CAM1_ID; then
     # Camera 1 triggered
 	  if [[ $LAST_EVENT == "start" ]]; then
 	    echo "Motion started on $CAM1_NAME"
